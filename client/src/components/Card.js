@@ -16,7 +16,7 @@ import { removeMovieFromLiked } from '../store';
 
 const Card = ({index,movieData,isLiked = false}) => {
 
-    console.log(movieData);
+    // console.log(movieData);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -25,19 +25,18 @@ const Card = ({index,movieData,isLiked = false}) => {
 
     onAuthStateChanged(firebaseAuth, (currentUser) => {
         if (currentUser) {
+          // console.log(currentUser.email);
         setEmail(currentUser.email);
         } else navigate("/login");
     });
 
     const addToList = async () => {
-        try {
-        await axios.post("http://localhost:5000/api/user/add", {
-            email,
-            data: movieData,
-        });
-        } catch (error) {
+      console.log("clicked");
+      try {
+        await axios.post("http://localhost:4500/api/users/add",{email,data : movieData})
+      } catch (error) {
         console.log(error);
-        }
+      }
     };
   return (
     <Container
@@ -98,7 +97,7 @@ const Card = ({index,movieData,isLiked = false}) => {
             <div className="genres flex">
               <ul className="flex">
                 {movieData.genres.map((genre) => (
-                  <li>{genre}</li>
+                  <li key={genre}>{genre}</li>
                 ))}
               </ul>
             </div>

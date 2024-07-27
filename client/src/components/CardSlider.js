@@ -6,23 +6,27 @@ import Card from './Card';
 const CardSlider = ({data,title}) => {
 
     const listRef = useRef();
-    const [sliderPosition, setSliderPosition] = useState(0);
-    const [showControls, setShowControls] = useState(false);
+    const [sliderposition, setSliderPosition] = useState(0);
+    const [showcontrols, setShowControls] = useState(false);
     const handleDirection = (direction) => {
-        let distance = listRef.current.getBoundingClientRect().x - 70;
-        if (direction === "left" && sliderPosition > 0) {
+      console.log(direction);
+      let distance = listRef.current.getBoundingClientRect().x - 70;
+      console.log(distance);
+      if(direction === 'left' && sliderposition > 0){
         listRef.current.style.transform = `translateX(${230 + distance}px)`;
-        setSliderPosition(sliderPosition - 1);
-        }
-        if (direction === "right" && sliderPosition < 4) {
+        setSliderPosition(sliderposition -1 );
+        
+      }
+      if(direction === 'right' && sliderposition < 4){
         listRef.current.style.transform = `translateX(${-230 + distance}px)`;
-        setSliderPosition(sliderPosition + 1);
-        }
+        setSliderPosition(sliderposition + 1);
+
+      }
     };
   return (
     <Container
       className="flex column"
-      showControls={showControls}
+      showcontrols={showcontrols}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
     >
@@ -30,7 +34,7 @@ const CardSlider = ({data,title}) => {
       <div className="wrapper">
         <div
           className={`slider-action left ${
-            !showControls ? "none" : ""
+            !showcontrols ? "none" : ""
           } flex j-center a-center`}
         >
           <AiOutlineLeft onClick={() => handleDirection("left")} />
@@ -42,7 +46,7 @@ const CardSlider = ({data,title}) => {
         </div>
         <div
           className={`slider-action right ${
-            !showControls ? "none" : ""
+            !showcontrols ? "none" : ""
           } flex j-center a-center`}
         >
           <AiOutlineRight onClick={() => handleDirection("right")} />
