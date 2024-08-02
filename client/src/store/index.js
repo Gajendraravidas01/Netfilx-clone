@@ -86,7 +86,7 @@ export const getUsersLikedMovies = createAsyncThunk(
   async (email) => {
     const {
       data: { movies },
-    } = await axios.get(`http://localhost:4500/api/users/liked/${email}`);
+    } = await axios.get(`https://netfilx-clone-backend.onrender.com/api/users/liked/${email}`);
     return movies;
   }
 );
@@ -96,7 +96,7 @@ export const removeMovieFromLiked = createAsyncThunk(
   async ({ movieId, email }) => {
     const {
       data: { movies },
-    } = await axios.put("http://localhost:4500/api/users/remove", {
+    } = await axios.put("https://netfilx-clone-backend.onrender.com/api/users/remove", {
       email,
       movieId,
     });
